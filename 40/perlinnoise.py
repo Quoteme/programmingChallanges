@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import random
-import functools as ft
 
 import matplotlib.pyplot as plt
 import math
@@ -11,7 +10,7 @@ def gradientvector(n):
         """
         Returns a random gradient vector of dimension n
         """
-        v = np.array([random.random()*2-1 for _ in range(n)])
+        v = np.random.rand(n)*2-np.ones(n)
         return v/la.norm(v)
 
 def perlin(g=[10,10],dg=[5,5],interpolation=5):
@@ -47,39 +46,6 @@ def perlin(g=[10,10],dg=[5,5],interpolation=5):
     for _ in range(interpolation):
         arr = interpolate(arr)
     return arr
-
-    # noise = ft.reduce(lambda x,y: [x for _ in range(y[0]*y[1])], zip(g,dg), None)
-    # DOT-PRODUCT
-    # def traverseMultidimensionalArray(callback,p=[0 for _ in g], i=0):
-    #     """
-    #     given an array with n natural numbers inside, apply callback on
-    #     all combinations of arrays that are smaller or equal in length
-    #     """
-    #     callback(p)
-    #     try:
-    #         if p[i] < g[i]:
-    #             q = list(p)
-    #             q[i] += 1
-    #             traverseMultidimensionalArray(callback,p,i+1)
-    #             traverseMultidimensionalArray(callback,q,i)
-    #             traverseMultidimensionalArray(callback,q,i+1)
-    #     except:
-    #         return
-    # print(traverseMultidimensionalArray(lambda))
-
-    # return noise
-
-# # grid :: [Integer] -> Integer*[ Integer*[] ]
-# def grid(g,n=None):
-#     if n == None:
-#         n = len(g)
-#     if len(g) > 1:
-#         return [ grid(g[1:],n) for _ in range(g[0])]
-#     elif len(g) == 1:
-#         return [ vector(n) for _ in range(g[0]) ]
-
-# def vector(n):
-#     return [ random.random() for _ in range(n)]
 
 def interpolate(arr,f=(lambda x,y: (x+y)/2) ):
     for e in np.ndenumerate(arr):
